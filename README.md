@@ -3,6 +3,7 @@
 
 > **Sentence-Tag DataBase Manager**
 
+[![Crates.io](https://img.shields.io/crates/v/stdbm?style=flat-square)](https://crates.io/crates/stdbm)
 [![Crates.io](https://img.shields.io/crates/d/stdbm?style=flat-square)](https://crates.io/crates/stdbm)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue?style=flat-square)](https://github.com/paulobarchi/stdbm/LICENSE.md)
 [![Build Status](https://img.shields.io/github/workflow/status/paulobarchi/stdbm/CI/style=flat-square)](https://github.com/paulobarchi/stdbm/actions/workflows/ci.yml)
@@ -38,7 +39,7 @@ SUBCOMMANDS:
     update    Update register value by id
 ```
 
-The start subcommand uses the config file information to start up the database. The default config file can be found at `` -- current content:
+The start subcommand uses the config file information to start up the database. The default config file can be found at [`config/default.toml`](config/default.toml) -- current content:
 
 ```toml
 config_type = "toml"
