@@ -8,9 +8,6 @@
 [![Build Status](https://img.shields.io/github/workflow/status/paulobarchi/stdbm/CI/style=flat-square)](https://github.com/paulobarchi/stdbm/actions/workflows/ci.yml)
 [![Contributors](https://img.shields.io/github/contributors/paulobarchi/stdbm?style=flat-square)](https://github.com/paulobarchi/stdbm/graphs/contributors)
 
-Licensed under [Apache 2.0](LICENSE.md).
-
-
 ## About
 
 Simple manager for databases with sentences and tags written in Rust.
@@ -55,3 +52,7 @@ check_ids_on_load = false
 overwrite = true
 bckp_folder = "bckp/"
 ```
+
+## License
+
+Licensed under [Apache 2.0](LICENSE.md).
