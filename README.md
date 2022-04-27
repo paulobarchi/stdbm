@@ -57,3 +57,19 @@ bckp_folder = "bckp/"
 ## License
 
 Licensed under [Apache 2.0](LICENSE.md).
+
+## Development
+
+### Create a New Tag & Run CI
+
+The CI (workflow at [`.github/workflows/ci.yml`](.github/workflows/ci.yml)) runs every time a new tag is pushed.
+
+To push a new git tag the following command can be used:
+```
+git tag v<MAJOR>.<MINOR>.<PATCH> && git push origin --tag
+```
+
+For example:
+```
+git tag v0.0.2 && git push origin --tag
+```
