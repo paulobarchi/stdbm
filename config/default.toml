@@ -1,0 +1,10 @@
+config_type = "toml"
+
+[data_io]
+data_file_type = "csv"
+sentences_file = "sentences.csv"
+tags_file = "tags.csv"
+sentences_tags_file = "sentences-tags.csv"
+check_ids_on_load = false
+overwrite = true
+bckp_folder = "bckp/"
