@@ -54,6 +54,27 @@ overwrite = true
 bckp_folder = "bckp/"
 ```
 
+## File structure
+```
+.
+├── .github
+│   ├── ISSUE_TEMPLATE
+│   │   ├── bug_report.md
+│   │   └── feature_request.md
+│   └── workflows
+│       └── ci.yml
+├── .gitignore
+├── Cargo.toml
+├── LICENSE.md
+├── README.md
+├── config
+│   └── default.toml
+└── src
+    ├── settings.rs
+    └── stdbm.rs
+
+```
+
 ## License
 
 Licensed under [Apache 2.0](LICENSE.md).
