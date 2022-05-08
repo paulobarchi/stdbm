@@ -6,7 +6,7 @@
 [![Crates.io](https://img.shields.io/crates/v/stdbm?style=flat-square)](https://crates.io/crates/stdbm)
 [![Crates.io](https://img.shields.io/crates/d/stdbm?style=flat-square)](https://crates.io/crates/stdbm)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue?style=flat-square)](https://github.com/paulobarchi/stdbm/LICENSE.md)
-[![Build Status](https://img.shields.io/github/workflow/status/paulobarchi/stdbm/CI/v0.0.1?style=flat-square)](https://github.com/paulobarchi/stdbm/actions/workflows/ci.yml?query=branch%3Av0.0.1)
+[![Build Status](https://img.shields.io/github/workflow/status/paulobarchi/stdbm/CI/v0.0.1?style=flat-square)](https://github.com/paulobarchi/stdbm/actions/workflows/ci.yml)
 [![Contributors](https://img.shields.io/github/contributors/paulobarchi/stdbm?style=flat-square)](https://github.com/paulobarchi/stdbm/graphs/contributors)
 
 ## About
