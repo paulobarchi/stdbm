@@ -37,8 +37,8 @@ enum Commands {
         filter_string: String
     },
     #[clap(
-        about = "Filter and display datatable \
-        registers which contain tag",
+        about = "Filter and display sentences \
+        which are related to tag",
         arg_required_else_help = true
     )]
     FilterTag {
