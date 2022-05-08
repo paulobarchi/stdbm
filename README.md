@@ -11,9 +11,9 @@
 
 ## About
 
-Simple manager for databases with sentences and tags written in Rust.
+Simple manager for databases with sentences and tags.
 * Sentence-tag relationship is 1:N;
-* I/O only with csv files for now.
+* I/O operations with csv files.
 
 ## Usage
 
@@ -28,15 +28,14 @@ OPTIONS:
     -h, --help    Print help information
 
 SUBCOMMANDS:
-    add       Add new register
-    filter    Filter and display datatable registers which contain filter_string
-    help      Print this message or the help of the given subcommand(s)
-    list      List registers of datatable
-    load      Load csv file to manipulate data
-    rm        Remove register by id
-    save      Save datatable to file path
-    start     Start (load) DB with info from config file
-    update    Update register value by id
+    add              Add new register
+    filter-string    Filter and display datatable registers which contain filter_string
+    filter-tag       Filter and display sentences which are related to tag
+    help             Print this message or the help of the given subcommand(s)
+    list             List registers of datatable
+    rm               Remove register by id
+    save             Save datatable to file path
+    update           Update register value by id
 ```
 
 The start subcommand uses the config file information to start up the database. The default config file can be found at [`config/default.toml`](config/default.toml) -- current content:
@@ -46,9 +45,9 @@ config_type = "toml"
 
 [data_io]
 data_file_type = "csv"
-sentences_file = "sentences.csv"
-tags_file = "tags.csv"
-sentences_tags_file = "sentences-tags.csv"
+sentences = "assets/sentences.csv"
+tags = "assets/tags.csv"
+sentences_tags = "assets/sentences_tags.csv"
 check_ids_on_load = false
 overwrite = true
 bckp_folder = "bckp/"
@@ -67,12 +66,16 @@ bckp_folder = "bckp/"
 ├── Cargo.toml
 ├── LICENSE.md
 ├── README.md
+├── assets
+│   ├── sentences.csv
+│   ├── sentences_tags.csv
+│   └── tags.csv
 ├── config
 │   └── default.toml
 └── src
+    ├── db_operations.rs
     ├── settings.rs
     └── stdbm.rs
-
 ```
 
 ## License
@@ -83,7 +86,7 @@ Licensed under [Apache 2.0](LICENSE.md).
 
 ### Create a New Tag & Run CI
 
-The CI (workflow at [`.github/workflows/ci.yml`](.github/workflows/ci.yml)) runs every time a new tag is pushed.
+The CI pipeline ([`.github/workflows/ci.yml`](.github/workflows/ci.yml)) runs every time a new tag is pushed.
 
 To push a new git tag the following command can be used:
 ```
