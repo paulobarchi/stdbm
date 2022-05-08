@@ -20,4 +20,3 @@ target/
 *.iml
 *.db
 */build/
-*.csv

@@ -1,4 +1,4 @@
-use config::{Config, ConfigError, File};
+use config::{Config, File};
 use serde::{Deserialize};
 
 
@@ -23,9 +23,9 @@ pub struct Settings {
 #[allow(unused)]
 pub struct DataIO {
     pub data_file_type: String,
-    pub sentences_file: String,
-    pub tags_file: String,
-    pub sentences_tags_file: String,
+    pub sentences: String,
+    pub tags: String,
+    pub sentences_tags: String,
     pub check_ids_on_load: bool,
     pub overwrite: bool,
     pub bckp_folder: String
@@ -33,12 +33,9 @@ pub struct DataIO {
 
 
 impl Settings {
-    pub fn new() -> Result<Self, ConfigError> {
-        let config = Config::builder()
-            // Add "default" configuration file
+    pub fn new() -> Config {
+        return Config::builder()
             .add_source(File::with_name("config/default"))
-            .build()?;
-        // Deserialize (and thus freeze) the entire configuration
-        config.try_deserialize()
+            .build().unwrap();
     }
 }
