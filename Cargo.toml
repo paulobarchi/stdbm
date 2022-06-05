@@ -1,7 +1,7 @@
 [package]
 name = "stdbm"
 description = "stdbm - Sentences-Tags DataBase Manager: simple manager for databases with sentences-tags relationship written in Rust"
-version = "0.0.2"
+version = "0.0.3"
 edition = "2021"
 readme = "README.md"
 license = "Apache-2.0"

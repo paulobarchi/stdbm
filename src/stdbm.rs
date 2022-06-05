@@ -1,13 +1,17 @@
 mod settings;
 mod db_operations;
+mod data_structures;
 
 extern crate csv;
 
 use clap::{Parser, Subcommand};
 use settings::Settings;
 use db_operations::{
-    list, filter_by_string, //filter_by_tag, add, update, rm, save
+    list, filter_by_string, filter_by_tag, //add, update, rm, save
 };
+
+
+const CONFIG_DATA_BLOCK: &str = "data_io.";
 
 
 #[derive(Debug, Parser)]
@@ -33,7 +37,6 @@ enum Commands {
         arg_required_else_help = true
     )]
     FilterString {
-        datatable_name: String,
         filter_string: String
     },
     #[clap(
@@ -83,28 +86,34 @@ enum Commands {
 fn main() {
     let args = Cli::parse();
     let settings = Settings::new();
-    let config_data_block = "data_io.".to_string();
+    let config_data_block = CONFIG_DATA_BLOCK.to_string();
+
+    let sentence_file_path: String = settings.get_string(
+        &(config_data_block.clone() + "sentences")).unwrap();
+    let tag_file_path: String = settings.get_string(
+        &(config_data_block.clone() + "tags")).unwrap();
+    let sentence_tag_file_path: String = settings.get_string(
+        &(config_data_block.clone() + "sentences_tags")).unwrap();
+        
 
     match args.command {
         Commands::List { datatable_name } => {
             println!("Listing {}", datatable_name);
             if let Err(err) = list(
                 settings.get_string(
-                    &(config_data_block + &datatable_name)
+                    &(config_data_block.clone() + &datatable_name)
                 )
                 .unwrap()) {
                 println!("error running list {}: {}", 
                     datatable_name, err);
             }
         }
-        Commands::FilterString { datatable_name, filter_string } => {
+        Commands::FilterString { filter_string } => {
             println!(
-                "Filtering {} with {}", 
-                    datatable_name, filter_string);
+                "Filtering sentences with {}", 
+                    filter_string);
             if let Err(err) = filter_by_string(
-                settings.get_string(
-                    &(config_data_block + &datatable_name)
-                ).unwrap(),
+                sentence_file_path,
                 &filter_string
             ) {
                 println!("error running filter_string: {}", 
@@ -112,11 +121,16 @@ fn main() {
             }
         }
         Commands::FilterTag { tag } => {
-            println!("Filtering by {}", tag);
-            // if let Err(err) = filter_by_tag(&tag) {
-            //     println!("error running filter_tag: {}", 
-            //         err);
-            // }
+            println!("Filtering by tag {}", tag);
+            if let Err(err) = filter_by_tag(
+                sentence_file_path,
+                tag_file_path,
+                sentence_tag_file_path,
+                &tag
+            ) {
+                println!("error running filter_tag: {}", 
+                    err);
+            }
         }
         Commands::Add { datatable_name, new_register } => {
             println!(

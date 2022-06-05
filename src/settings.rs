@@ -3,13 +3,13 @@ use serde::{Deserialize};
 
 
 // // Default values in case we need them in the future
-// const DEFAULT_DATA_FILE_TYPE = "csv";
-// const DEFAULT_SENTENCES_FILE = "sentences.csv"
-// const DEFAULT_TAGS_FILE = "tags.csv"
-// const DEFAULT_SENTENCES_TAGS_FILE = "sentences-tags.csv"
-// const DEFAULT_CHECK_IDS_ON_LOAD = false
-// const DEFAULT_OVERWRITE = true
-// const DEFAULT_BCKP_FOLDER = "bckp/"
+// const DEFAULT_DATA_FILE_TYPE: &str = "csv";
+// const DEFAULT_SENTENCES_FILE: &str = "sentences.csv"
+// const DEFAULT_TAGS_FILE: &str = "tags.csv"
+// const DEFAULT_SENTENCES_TAGS_FILE: &str = "sentences-tags.csv"
+// const DEFAULT_CHECK_IDS_ON_LOAD: &str = false
+// const DEFAULT_OVERWRITE: &str = true
+// const DEFAULT_BCKP_FOLDER: &str = "bckp/"
 
 
 #[derive(Debug, Deserialize)]
