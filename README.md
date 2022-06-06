@@ -11,7 +11,8 @@
 
 ## About
 
-Simple manager for databases with sentences and tags.
+Simple manager for databases with sentences-tags relationship
+
 * Sentence-tag relationship is 1:N;
 * I/O operations with csv files.
 
@@ -28,17 +29,17 @@ OPTIONS:
     -h, --help    Print help information
 
 SUBCOMMANDS:
-    add              Add new register
+    add              Add new register (to either sentences or tags)
     filter-string    Filter and display datatable registers which contain filter_string
     filter-tag       Filter and display sentences which are related to tag
     help             Print this message or the help of the given subcommand(s)
+    link             Link sentence and tag
     list             List registers of datatable
     rm               Remove register by id
-    save             Save datatable to file path
     update           Update register value by id
 ```
 
-The start subcommand uses the config file information to start up the database. The default config file can be found at [`config/default.toml`](config/default.toml) -- current content:
+The default configuration file can be found at [`config/default.toml`](config/default.toml) -- current content:
 
 ```toml
 config_type = "toml"
@@ -48,9 +49,6 @@ data_file_type = "csv"
 sentences = "assets/sentences.csv"
 tags = "assets/tags.csv"
 sentences_tags = "assets/sentences_tags.csv"
-check_ids_on_load = false
-overwrite = true
-bckp_folder = "bckp/"
 ```
 
 ## File structure
@@ -96,5 +94,13 @@ git tag v<MAJOR>.<MINOR>.<PATCH> && git push origin --tag
 
 For example:
 ```
-git tag v0.0.2 && git push origin --tag
+git tag v0.1.0 && git push origin --tag
 ```
+
+### [WIP] Current TODOs
+* Work on missing functionalities:
+    - Update record
+    - Remove record
+* Overall improvements - good practices
+    - Add tests
+    - Improve reusability of functions

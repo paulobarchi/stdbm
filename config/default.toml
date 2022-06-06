@@ -5,6 +5,3 @@ data_file_type = "csv"
 sentences = "assets/sentences.csv"
 tags = "assets/tags.csv"
 sentences_tags = "assets/sentences_tags.csv"
-check_ids_on_load = false
-overwrite = true
-bckp_folder = "bckp/"

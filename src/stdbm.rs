@@ -7,7 +7,7 @@ extern crate csv;
 use clap::{Parser, Subcommand};
 use settings::Settings;
 use db_operations::{
-    list, filter_by_string, filter_by_tag, //add, update, rm, save
+    list, filter_by_string, filter_by_tag, add, link, //update, rm
 };
 
 
@@ -48,12 +48,20 @@ enum Commands {
         tag: String
     },
     #[clap(
-        about = "Add new register",
+        about = "Add new register (to either sentences or tags)",
         arg_required_else_help = true
     )]
     Add {
         datatable_name: String,
         new_register: String
+    },
+    #[clap(
+        about = "Link sentence and tag",
+        arg_required_else_help = true
+    )]
+    Link {
+        id_sentence: String,
+        id_tag: String
     },
     #[clap(
         about = "Update register value by id",
@@ -71,14 +79,6 @@ enum Commands {
     Rm {
         datatable_name: String,
         id_register: usize
-    },
-    #[clap(
-        about = "Save datatable to file path",
-        arg_required_else_help = true
-    )]
-    Save {
-        datatable_name: String,
-        file_path: String
     }
 }
 
@@ -94,30 +94,32 @@ fn main() {
         &(config_data_block.clone() + "tags")).unwrap();
     let sentence_tag_file_path: String = settings.get_string(
         &(config_data_block.clone() + "sentences_tags")).unwrap();
-        
+    let datatable_vec: Vec<String> =  vec!["sentences".to_string(),"tags".to_string()];
 
     match args.command {
         Commands::List { datatable_name } => {
-            println!("Listing {}", datatable_name);
-            if let Err(err) = list(
-                settings.get_string(
-                    &(config_data_block.clone() + &datatable_name)
-                )
-                .unwrap()) {
-                println!("error running list {}: {}", 
-                    datatable_name, err);
+            if datatable_vec.contains(&datatable_name.clone()) {
+                println!("Listing {}", datatable_name.clone());
+                if let Err(err) = list(
+                    settings.get_string(
+                        &(config_data_block.clone() + &datatable_name)
+                    ).unwrap()) 
+                {
+                    println!("Error running list {}: {}", 
+                        datatable_name.clone(), err);
+                }
+            }
+            else {
+                println!("{} not in available datatables", 
+                    datatable_name.clone());
             }
         }
         Commands::FilterString { filter_string } => {
-            println!(
-                "Filtering sentences with {}", 
-                    filter_string);
+            println!("Filtering sentences with {}", filter_string);
             if let Err(err) = filter_by_string(
-                sentence_file_path,
-                &filter_string
-            ) {
-                println!("error running filter_string: {}", 
-                    err);
+                sentence_file_path, &filter_string) 
+            {
+                println!("Error running filter_string: {}", err);
             }
         }
         Commands::FilterTag { tag } => {
@@ -126,16 +128,41 @@ fn main() {
                 sentence_file_path,
                 tag_file_path,
                 sentence_tag_file_path,
-                &tag
-            ) {
-                println!("error running filter_tag: {}", 
-                    err);
+                &tag) 
+            {
+                println!("Error running filter_tag: {}", err);
             }
         }
         Commands::Add { datatable_name, new_register } => {
+            if datatable_vec.contains(&datatable_name.clone()) {
+                println!(
+                    "Adding {} into {}", new_register, datatable_name
+                );
+                if let Err(err) = add(
+                    settings.get_string(
+                        &(config_data_block.clone() + &datatable_name)
+                    ).unwrap(),
+                    &new_register) 
+                {
+                    println!("Error running add {}: {}", datatable_name, err);
+                }
+            }
+            else {
+                println!("{} not in available datatables", datatable_name.clone());
+            }
+        }
+        Commands::Link { id_sentence, id_tag } => {
             println!(
-                "Adding {} into {}", new_register, datatable_name
-            );
+                "Linking id_sentence {} to id_tag {}", id_sentence, id_tag);
+            if let Err(err) = link(
+                sentence_file_path,
+                tag_file_path,
+                sentence_tag_file_path,
+                id_sentence,
+                id_tag) 
+            {
+                println!("Error running link: {}", err);
+            }
         }
         Commands::Update { datatable_name, id_register, new_value } => {
             println!(
@@ -147,12 +174,6 @@ fn main() {
             println!(
                 "Removing id {} from {}", 
                 id_register, datatable_name 
-            );
-        }
-        Commands::Save { datatable_name, file_path } => {
-            println!(
-                "Saving {} to {:?}", 
-                datatable_name, file_path
             );
         }
     }
