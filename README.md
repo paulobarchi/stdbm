@@ -13,7 +13,7 @@
 
 Simple manager for databases with sentences-tags relationship
 
-* Sentence-tag relationship is 1:N;
+* Sentence-tag relationship is N:N;
 * I/O operations with csv files.
 
 ## Usage
